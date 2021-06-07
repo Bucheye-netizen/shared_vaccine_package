@@ -68,7 +68,7 @@ class RewardCard extends StatelessWidget {
                           height: con.kMediumSpacing,
                         ),
                         Text(this.model.description, style: TextStyle(fontSize: 12, color: borderColor)),
-                        Text(this.model.expirationDate == null ? 'There is no expiration date for this reward' : 'Reward expires in ${this.model.daysToExpiration()} days'),
+                        Text(this.model.expirationDate == null ? 'There is no expiration date for this reward' : 'Reward expires in ${this.model.daysToExpiration()} days', style: TextStyle(fontSize: 12, color: borderColor),),
                       ],
                     ),
                   ),
