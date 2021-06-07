@@ -5,7 +5,7 @@ abstract class OverlaySkeleton {
 
   void show(BuildContext context);
 
-  void remove(BuildContext context);
+  void remove();
 
   void dispose();
 

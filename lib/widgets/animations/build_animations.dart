@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 class FadeInBuild extends StatefulWidget {
   final Widget child;
   final Duration duration;
+  final double startingOpacity;
 
-  FadeInBuild({required this.child, this.duration = const Duration(seconds: 1)});
+  FadeInBuild({required this.child, this.duration = const Duration(seconds: 1), this.startingOpacity = 0})
+      : assert(
+  startingOpacity >= 0 && startingOpacity <= 1, 'Given starting opacity did not fit the Opacity widgets constraints!');
 
   @override
   _FadeInBuildState createState() => _FadeInBuildState();
@@ -26,7 +29,7 @@ class _FadeInBuildState extends State<FadeInBuild> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    return _FadeInAnimation(_animation, child: this.widget.child);
+    return _FadeInAnimation(_animation, child: this.widget.child, startingOpacity: this.widget.startingOpacity,);
   }
 
   @override
@@ -37,10 +40,13 @@ class _FadeInBuildState extends State<FadeInBuild> with SingleTickerProviderStat
 }
 
 class _FadeInAnimation extends AnimatedWidget {
-  static Tween<double> _opacity = Tween<double>(begin: 0, end: 1);
+  final Tween<double> _opacity;
   final Widget child;
+  final double startingOpacity;
 
-  _FadeInAnimation(Animation<double> animation, {required this.child}) : super(listenable: animation);
+  _FadeInAnimation(Animation<double> animation, {required this.child, required this.startingOpacity})
+      : _opacity = Tween<double>(begin: startingOpacity, end: 1),
+        super(listenable: animation);
 
   @override
   Widget build(BuildContext context) {

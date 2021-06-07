@@ -12,8 +12,6 @@ class RewardModel {
   final String state;
   final String? city;
 
-  ///WARNING: USED FOR TESTING PURPOSES ONLY.
-  @deprecated
   final String _uid;
   final DateTime? expirationDate;
 
@@ -80,7 +78,6 @@ class RewardModel {
     return formattedPrice;
   }
 
-  @deprecated
   String get uid => _uid;
 
   Map<String, dynamic> toMap() {
@@ -102,5 +99,17 @@ class RewardModel {
     }
 
     return expirationDate!.isBefore(DateTime.now());
+  }
+
+  int daysToExpiration(){
+    if(expirationDate == null){
+      return -1;
+    }else{
+      if(hasExpired()){
+        return 0;
+      }else{
+        return expirationDate!.day - DateTime.now().day;
+      }
+    }
   }
 }
