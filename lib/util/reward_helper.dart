@@ -113,5 +113,5 @@ class RewardHelper {
 
   int get nationwideValue => _nationwideValue;
 
-  int get usaValue => usaValue; 
+  int get usaValue => _usaValue;
 }
