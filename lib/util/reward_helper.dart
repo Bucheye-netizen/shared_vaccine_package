@@ -9,7 +9,11 @@ RewardHelper? REWARD_HELPER;
 
 class RewardHelper {
   final List<RewardModel> models;
-  int _usTotalValue = 0;
+  ///The value of all the models without a state selected
+  int _nationwideValue = 0;
+
+  ///The total amount of reward money in the us.
+  int _usaValue = 0;
 
   ///Contains all the state reward values. If the state doesn't provide any rewards, than, when searched for via state key, will return null.
   Map<String, int> _stateValues = {};
@@ -19,7 +23,7 @@ class RewardHelper {
   }
 
   ///RewardHelper from a querysnapshot. Used in streams. Presets the models to zero so they can be added to later.
-  RewardHelper.fromSnapshot({required QuerySnapshot<Map<String, dynamic>> snapshot}) : models = []{
+  RewardHelper.fromSnapshot({required QuerySnapshot<Map<String, dynamic>> snapshot}) : models = [] {
     calcAllFromSnapshot(snapshot);
   }
 
@@ -30,6 +34,7 @@ class RewardHelper {
       RewardModel? model;
       Map<String, double> values = {};
       double usTotal = 0;
+
       Map<String, dynamic> data = {};
 
       snapshot.docs.forEach((element) {
@@ -61,8 +66,8 @@ class RewardHelper {
         });
 
         Print('Rounding us total value..');
-        this._usTotalValue = usTotal.round();
-        Print('This is the total us value $_usTotalValue');
+        this._nationwideValue = usTotal.round();
+        Print('This is the total us value $_nationwideValue');
         Print.success('Mapping complete!');
       });
     } catch (e) {
@@ -75,19 +80,22 @@ class RewardHelper {
   ///I wouldn't have otherwise. Initializes _stateValues and _usTotalValue.
   void _calcTotalsFromModel(List<RewardModel> models) {
     Map<String, double> values = {};
-
-    double usTotal = 0;
+    double nationwideTotal = 0;
+    double usaValue = 0;
 
     models.forEach((element) {
       if (element.reward != null && element.state.isEmpty == false) {
         if (element.state == 'Nationwide') {
-          usTotal += element.reward!;
+          nationwideTotal += element.reward!;
+          usaValue += element.reward!;
         } else {
           if (values.containsKey(element.state)) {
             values[element.state] = element.reward! + values[element.state]!.toDouble();
           } else {
             values[element.state] = element.reward!;
           }
+
+          usaValue += element.reward!;
         }
       }
     });
@@ -95,12 +103,15 @@ class RewardHelper {
     this._stateValues = values.map((key, value) {
       return MapEntry(key, value.round());
     });
+    this._usaValue = usaValue.round();
 
-    this._usTotalValue = usTotal.round();
-    Print('This is the total us value $_usTotalValue');
+    this._nationwideValue = nationwideTotal.round();
+    Print('This is the total us value $_nationwideValue');
   }
 
   Map<String, int> get stateValues => _stateValues;
 
-  int get usTotalValue => _usTotalValue;
+  int get nationwideValue => _nationwideValue;
+
+  int get usaValue => usaValue; 
 }
