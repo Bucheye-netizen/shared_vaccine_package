@@ -103,7 +103,7 @@ class RewardHelper {
     this._usaValue = usaValue.round();
 
     this._nationwideValue = nationwideTotal.round();
-    Print('This is the total us value $_nationwideValue');
+    Print('This is the total us value $_nationwideValue', channel: 'info', subChannel: 'shared');
   }
 
   Map<String, int> get stateValues => _stateValues;

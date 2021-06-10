@@ -9,9 +9,9 @@ class Result{
 
   Result({this.message = '', required this.code, this.error});
 
-  void printError() {
+  void printError({String channel = '', String? subChannel}) {
     if(error != null) {
-      Print.error(error!);
+      Print.error(error!, channel: channel, subChannel: subChannel);
     }else{
       Print.fail('No error has been provided to this result');
     }

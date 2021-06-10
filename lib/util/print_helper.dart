@@ -3,6 +3,8 @@ import 'package:ansicolor/ansicolor.dart';
 ///This class that colorizes print statements using a package so I can view it better in the console.
 class Print {
   static AnsiPen _pen = AnsiPen();
+
+
   static Map<String, PrintChannel> _channels = {
     'debug': PrintChannel(channel: 'debug', isEnabled: true, subChannels: {
       'shared' : SubChannel(name: 'shared'),
@@ -10,8 +12,11 @@ class Print {
     'info': PrintChannel(channel: 'info', isEnabled: true, subChannels: {
       'shared' : SubChannel(name: 'shared'),
     }),
+    'error': PrintChannel(channel: 'error', isEnabled: true, subChannels: {
+      'shared': SubChannel(name: 'shared'),
+    })
   };
-  
+
   Print(Object text, {String channel = '', String? subChannel}) {
     if (channel != '' && _channels[channel]!.isEnabled == false) {
       return;
@@ -90,7 +95,7 @@ class Print {
     }
   }
 
-  static addSubChannel(String channel, SubChannel subChannel){
+  static void addSubChannel(String channel, SubChannel subChannel){
     if(_channels[channel] != null){
       if(_channels[subChannel]!.subChannels[subChannel.name] == null) {
         _channels[subChannel]!.subChannels[subChannel.name] = subChannel;
@@ -101,6 +106,30 @@ class Print {
     }else{
       throw (Exception('Channel does not exist!'));
     }
+  }
+
+  static void disableSubChannel(String channel, String subChannel){
+    if(_channels[channel] == null){
+      throw(Exception('Channel does not exist!'));
+    }
+
+    if(_channels[channel]!.subChannels[subChannel] == null){
+      throw(Exception('Sub Channel does not exist!'));
+    }
+
+    _channels[channel]!.subChannels[subChannel]!.isEnabled = false;
+  }
+
+  static void enabledSubChannel(String channel, String subChannel){
+    if(_channels[channel] == null){
+      throw(Exception('Channel does not exist!'));
+    }
+
+    if(_channels[channel]!.subChannels[subChannel] == null){
+      throw(Exception('Sub Channel does not exist!'));
+    }
+
+    _channels[channel]!.subChannels[subChannel]!.isEnabled = true;
   }
 }
 

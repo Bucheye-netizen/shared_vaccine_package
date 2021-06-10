@@ -11,9 +11,8 @@ class UrlHelper{
       isSuccessful ? Print.success('Launch succeeded') : Print.fail('Url Launch failed');
       return isSuccessful;
     }else{
-      Print.error('This url cannot be launched');
+      Print.error('This url cannot be launched', channel: 'info', subChannel: 'shared');
       return false;
     }
-
   }
 }

@@ -28,7 +28,7 @@ class RewardData {
 
       return rewards;
     }catch (e){
-      Print.error(e);
+      Print.error(e, channel: 'error', subChannel: 'shared');
       return [];
     }
   }
@@ -46,7 +46,7 @@ class RewardData {
 
       return Result(code: ResultCode.SUCCESS);
     } catch (e){
-      Print.error(e);
+      Print.error(e, channel: 'error', subChannel: 'shared');
       return Result(code: ResultCode.ERROR, message: 'Reward Editing failed');
     }
   }
