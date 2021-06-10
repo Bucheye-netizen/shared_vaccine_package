@@ -97,8 +97,8 @@ class Print {
 
   static void addSubChannel(String channel, SubChannel subChannel){
     if(_channels[channel] != null){
-      if(_channels[subChannel]!.subChannels[subChannel.name] == null) {
-        _channels[subChannel]!.subChannels[subChannel.name] = subChannel;
+      if(_channels[channel]!.subChannels[subChannel.name] == null) {
+        _channels[channel]!.subChannels[subChannel.name] = subChannel;
       }else{
         throw (Exception('Sub channel already exists!'));
 
