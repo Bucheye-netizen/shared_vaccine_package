@@ -11,7 +11,7 @@ class Result{
 
   void printError({String channel = '', String? subChannel}) {
     if(error != null) {
-      Print.error(error!, channel: channel, subChannel: subChannel);
+      Print.error(error!);
     }else{
       Print.fail('No error has been provided to this result');
     }

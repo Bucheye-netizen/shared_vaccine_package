@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RewardModel {
-  final String link;
+  final String? link;
 
   ///Unfortunately, the provided spreadsheet forces us to use a String format for the monetary rewards.
   final double? reward;
@@ -108,7 +108,8 @@ class RewardModel {
       if(hasExpired()){
         return 0;
       }else{
-        return expirationDate!.day - DateTime.now().day;
+        Duration duration = expirationDate!.difference(DateTime.now());
+        return duration.inDays;
       }
     }
   }

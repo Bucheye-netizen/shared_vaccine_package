@@ -29,7 +29,7 @@ class RewardHelper {
 
   void calcAllFromSnapshot(QuerySnapshot<Map<String, dynamic>> snapshot) {
     try {
-      Print('Refactoring snapshot data into readable fields..', channel: 'info', subChannel: 'shared');
+      Print('Refactoring snapshot data into readable fields..');
 
       RewardModel? model;
       Map<String, double> values = {};
@@ -66,7 +66,7 @@ class RewardHelper {
 
         this._nationwideValue = usTotal.round();
       });
-      Print.success('All rewards from firebase have been mapped into RewardModels successfully!', channel: 'info', subChannel: 'shared');
+      Print.success('All rewards from firebase have been mapped into RewardModels successfully!');
     } catch (e) {
       Print.error(e);
     }
@@ -103,7 +103,7 @@ class RewardHelper {
     this._usaValue = usaValue.round();
 
     this._nationwideValue = nationwideTotal.round();
-    Print('This is the total us value $_nationwideValue', channel: 'info', subChannel: 'shared');
+    Print('This is the total us value $_nationwideValue');
   }
 
   Map<String, int> get stateValues => _stateValues;
