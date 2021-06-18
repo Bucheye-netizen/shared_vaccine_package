@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class RewardModel {
   final String? link;
 
-  ///Unfortunately, the provided spreadsheet forces us to use a String format for the monetary rewards.
+  ///Unfortunately, the provided spreadsheet forces us to use a String format for the monetary rewards. bummer
   final double? reward;
 
   ///The person who provides the rewards
