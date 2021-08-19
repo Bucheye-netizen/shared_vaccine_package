@@ -23,6 +23,16 @@ class RewardData {
         map['uid'] = element.id;
         map['expirationDate'] = map['expirationDate'] != null ? (map['expirationDate'] as Timestamp).toDate() : null;
 
+        Iterator<MapEntry<String, dynamic>> iterator = map.entries.iterator;
+
+        while(iterator.moveNext()) {
+          if(iterator.current.value is String && iterator.current.key != 'city' && iterator.current.key != 'city'){
+            if(iterator.current.value == null){
+                print('NULL, key: ${iterator.current.key}, uid: ${element.id}');
+            }
+          }
+        }
+
         rewards.add(RewardModel.fromMap(map));
       });
 
