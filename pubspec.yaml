@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   ansicolor: ^2.0.1
-  cloud_firestore: ^2.2.1
+  cloud_firestore: ^4.16.0
   flutter:
     sdk: flutter
   url_launcher: ^6.0.6
